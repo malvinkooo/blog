@@ -1,8 +1,7 @@
 <!-- ****** Top Header Area Start ****** -->
-    <div class="top_header_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-5 col-sm-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-5 col-sm-6">
                 <!--  Login Register Area -->
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
@@ -24,7 +23,6 @@
         </div>
     </div>
     <!-- ****** Top Header Area End ****** -->
-
     <!-- ****** Header Area Start ****** -->
     <header class="header_area">
         <div class="container">
@@ -32,11 +30,10 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">Yummy Blog</a>
+                        <a href="/" class="yummy-logo">Yummy Blog</a>
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
@@ -45,16 +42,16 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Главная <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">Home</a>
-                                        <a class="dropdown-item" href="archive.html">Archive</a>
-                                        <a class="dropdown-item" href="single.html">Single Blog</a>
-                                        <a class="dropdown-item" href="static.html">Static Page</a>
-                                        <a class="dropdown-item" href="contact.html">Contact</a>
+                                        <a class="dropdown-item" href="/">Главная</a>
+                                    {% for category in categories %}
+                                        <a class="dropdown-item" href="/section.php?id={{category.id}}">{{category.category_name}}
+                                        </a>
+                                    {% endfor %}
                                     </div>
                                 </li>
                             </ul>
