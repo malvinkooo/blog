@@ -1508,3 +1508,76 @@ li {
 .buttons_wrap i:hover {
     color: #fbb099;
 }
+/*popup*/
+.wrap-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1;
+    display: none;
+}
+.wrap-popup.opened,
+.add-category.opened {
+    display: block;
+}
+.close-popup {
+    font-size: 26px;
+    color: #000000;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+.close-popup:hover {
+    cursor: pointer;
+    color: #fc6c3f;
+}
+.add-category {
+    position: relative;
+    width: 500px;
+    margin: 50px auto 0 auto;
+    background-color: #ffffff;
+    padding: 50px 20px 35px 20px;
+    border-radius: 20px;
+    display: none;
+}
+.popup-title {
+    font-size: 20px;
+}
+.input-text {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    background-color: #ffffff;
+    border: 1px solid silver;
+    padding: 5px;
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+.input-submit,
+.input-cancel {
+    display: inline-block;
+    color: #000000;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 30px;
+    border: 1px solid silver;
+    padding: 10px 0;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+.input-cancel {
+    float: right;
+}
+.input-submit:hover,
+.input-cancel:hover {
+    background-color: #fc6c3f;
+    border-color: #fc6c3f;
+    color: #ffffff;
+}

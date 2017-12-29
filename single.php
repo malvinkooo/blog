@@ -8,7 +8,7 @@ $categories = get_categories();
 
 $current_category = get_current_category($_GET['category_id']);
 
-$article = get_article($_GET['category_id']);
+$article = get_article($_GET['article_id']);
 
 echo $twig->render('single.html', array('categories' => $categories, 'current_category' => $current_category[0], 'article' => $article[0]));
 ?>

@@ -132,4 +132,27 @@
         });
     });
 
+    /*add category*/
+    $(".wrap-popup form").click(function(e){
+        e.stopPropagation();
+    });
+    $(".js-add-category").click(function(e){
+        e.preventDefault();
+        $(".wrap-popup").addClass("opened");
+        $(".add-category").addClass("opened");
+    });
+    $(".close-popup").click(function(){
+        $(".wrap-popup").removeClass("opened");
+        $(".wrap-popup form").removeClass("opened");
+    });
+    $(".input-cancel").click(function(e){
+        e.preventDefault();
+        $(".wrap-popup").removeClass("opened");
+        $(".add-category").removeClass("opened");
+    });
+    $(".wrap-popup").click(function(){
+        $(this).removeClass("opened");
+        $(".wrap-popup form").removeClass("opened");
+    });
+
 })(jQuery);

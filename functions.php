@@ -34,7 +34,12 @@ function get_current_category($id) {
 function get_article($id) {
 	global $db;
 	$stm = $db->prepare("SELECT * FROM articles WHERE id = ?");
-	$stm->execute(array($_GET['article_id']));
+	$stm->execute(array($id));
 	return $stm->fetchAll(PDO::FETCH_ASSOC);
+}
+function add_category($name) {
+	global $db;
+	$stm = $db->prepare("INSERT INTO `categories` (`category_name`) VALUES (?)");
+	$stm->execute(array($name));
 }
 ?>
