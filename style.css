@@ -1521,7 +1521,8 @@ li {
 }
 .wrap-popup.opened,
 .add-category.opened,
-.remove-category.opened {
+.remove-category.opened,
+.edit-category.opened {
     display: block;
 }
 .close-popup {
@@ -1536,7 +1537,8 @@ li {
     color: #fc6c3f;
 }
 .add-category,
-.remove-category {
+.remove-category,
+.edit-category {
     position: relative;
     width: 500px;
     margin: 50px auto 0 auto;

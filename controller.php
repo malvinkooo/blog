@@ -15,9 +15,11 @@ switch ($_GET['mode']) {
 			header('Location: http://blog.com/');
 		}
 		break;
-
-	default:
-		# code...
+	case "edit-category":
+		if(isset($_POST['id-category'])) {
+			edit_category($_POST['id-category'], $_POST['category']);
+			header('Location: http://blog.com/');
+		}
 		break;
 }
 ?>

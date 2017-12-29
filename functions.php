@@ -39,12 +39,17 @@ function get_article($id) {
 }
 function add_category($name) {
 	global $db;
-	$stm = $db->prepare("INSERT INTO `categories` (`category_name`) VALUES (?)");
+	$stm = $db->prepare("INSERT INTO categories (`category_name`) VALUES (?)");
 	$stm->execute(array($name));
 }
 function remove_category($id) {
 	global $db;
 	$stm = $db->prepare("DELETE FROM categories WHERE id = ?");
 	$stm->execute(array($id));
+}
+function edit_category($id, $category_name) {
+	global $db;
+	$stm = $db->prepare("UPDATE categories SET category_name = :category_name WHERE id = :id");
+	$stm->execute(array(':category_name' => $category_name, ':id' => $id));
 }
 ?>

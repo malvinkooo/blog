@@ -22,7 +22,7 @@
                         </div>
                         <!-- edit/delete -->
                         <div class="buttons_wrap">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <i class="fa fa-pencil-square-o js-edit-category" data-name-category="{{category.category_name}}" data-id-category="{{category.id}}" aria-hidden="true"></i>
                             <i class="fa fa-times js-remove-category" data-id-category="{{category.id}}" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -46,8 +46,18 @@
             <a href="#" class="input-cancel">Отмена</a>
         </form>
         <!-- edit -->
+        <form action="/controller.php?mode=edit-category" method="POST" class="edit-category">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Измените название категории:
+            </h3>
+            <input type="text" class="input-text" name="category">
+            <input type="submit" value="Сохранить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="id-category">
+        </form>
         <!-- delete -->
-        <form action="/controller.php?mode=remove-category&id=" method="POST" class="remove-category">
+        <form action="/controller.php?mode=remove-category" method="POST" class="remove-category">
             <i class="fa fa-times close-popup" aria-hidden="true"></i>
             <h3 class="popup-title">
                 Вы уверены, что хотите удалить категорию?

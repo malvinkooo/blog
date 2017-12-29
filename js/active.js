@@ -163,5 +163,15 @@
         var id = $(this).attr("data-id-category");
         $(".remove-category input[type='hidden']").attr('value', id);
     });
+    /*edit category*/
+    $(".js-edit-category").click(function(){
+        $(".wrap-popup").addClass("opened");
+        $(".edit-category").addClass("opened");
 
+        var id = $(this).attr("data-id-category");
+        $(".edit-category input[type='hidden']").attr('value', id);
+
+        var name = $(this).attr("data-name-category");
+        $(".edit-category input[type='text']").attr('value', name);
+    });
 })(jQuery);
