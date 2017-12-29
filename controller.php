@@ -5,20 +5,23 @@ switch ($_GET['mode']) {
 	case "add-category":
 		if(isset($_POST['category'])) {
 			add_category($_POST['category']);
-			header('Location: http://blog.com/');
+			header('Location: /');
+			exit();
 		}
 		break;
 
 	case "remove-category":
 		if(isset($_POST['id-category'])) {
-			remove_category($_POST['id-category']);
-			header('Location: http://blog.com/');
+			remove_category($_POST['category-id']);
+			header('Location: /');
+			exit();
 		}
 		break;
 	case "edit-category":
-		if(isset($_POST['id-category'])) {
-			edit_category($_POST['id-category'], $_POST['category']);
-			header('Location: http://blog.com/');
+		if(isset($_POST['category-id'])) {
+			edit_category($_POST['category-id'], $_POST['category']);
+			header('Location: /');
+			exit();
 		}
 		break;
 }
