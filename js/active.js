@@ -148,11 +148,20 @@
     $(".input-cancel").click(function(e){
         e.preventDefault();
         $(".wrap-popup").removeClass("opened");
-        $(".add-category").removeClass("opened");
+        $(".wrap-popup form").removeClass("opened");
     });
     $(".wrap-popup").click(function(){
         $(this).removeClass("opened");
         $(".wrap-popup form").removeClass("opened");
+    });
+
+    /*remove category*/
+    $(".js-remove-category").click(function(){
+        $(".wrap-popup").addClass("opened");
+        $(".remove-category").addClass("opened");
+
+        var id = $(this).attr("data-id-category");
+        $(".remove-category input[type='hidden']").attr('value', id);
     });
 
 })(jQuery);

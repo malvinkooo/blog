@@ -42,4 +42,9 @@ function add_category($name) {
 	$stm = $db->prepare("INSERT INTO `categories` (`category_name`) VALUES (?)");
 	$stm->execute(array($name));
 }
+function remove_category($id) {
+	global $db;
+	$stm = $db->prepare("DELETE FROM categories WHERE id = ?");
+	$stm->execute(array($id));
+}
 ?>

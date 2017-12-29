@@ -23,7 +23,7 @@
                         <!-- edit/delete -->
                         <div class="buttons_wrap">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <i class="fa fa-times js-remove-category" data-id-category="{{category.id}}" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -47,6 +47,15 @@
         </form>
         <!-- edit -->
         <!-- delete -->
+        <form action="/controller.php?mode=remove-category&id=" method="POST" class="remove-category">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Вы уверены, что хотите удалить категорию?
+            </h3>
+            <input type="submit" value="Удалить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="id-category">
+        </form>
     </div>
     <!-- ****** Popup add/edit/delete category End ****** -->
 
