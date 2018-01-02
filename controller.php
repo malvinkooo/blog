@@ -24,5 +24,15 @@ switch ($_GET['mode']) {
 			exit();
 		}
 		break;
+	case "add-comment":
+		echo "<pre>";
+		var_dump($_POST);
+		echo "</pre>";
+		// if(isset($_POST['category-id'])) {
+		// 	edit_category($_POST['category-id'], $_POST['category']);
+		// 	header('Location: /');
+		// 	exit();
+		// }
+		break;
 }
 ?>

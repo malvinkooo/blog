@@ -17,14 +17,12 @@ function get_categories() {
 	$stm->execute();
 	return $stm->fetchAll(PDO::FETCH_ASSOC);
 }
-
 function get_articles_by_category($id) {
 	global $db;
 	$stm = $db->prepare("SELECT * FROM articles WHERE category_id = ?");
 	$stm->execute(array($id));
 	return $stm->fetchAll(PDO::FETCH_ASSOC);
 }
-
 function get_current_category($id) {
 	global $db;
 	$stm = $db->prepare("SELECT * FROM categories WHERE id = ?");
@@ -51,5 +49,11 @@ function edit_category($id, $category_name) {
 	global $db;
 	$stm = $db->prepare("UPDATE categories SET category_name = :category_name WHERE id = :id");
 	$stm->execute(array(':category_name' => $category_name, ':id' => $id));
+}
+function get_comments($article_id) {
+	global $db;
+	$stm = $db->prepare("SELECT * FROM comments WHERE article_id = ?");
+	$stm->execute(array($article_id));
+	return $stm->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
