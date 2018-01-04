@@ -71,4 +71,9 @@ function remove_comment($id) {
 	$stm = $db->prepare("DELETE FROM comments WHERE id = ?");
 	$stm->execute(array($id));
 }
+function edit_comment($comment) {
+	global $db;
+	$stm = $db->prepare("UPDATE comments SET text = :text WHERE id = :id");
+	$stm->execute(array(':text' => $comment['text'], ':id' => $comment['comment-id']));
+}
 ?>

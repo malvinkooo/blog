@@ -346,7 +346,7 @@
                                             <div class="comment-content">
                                                 <span class="comment-date text-muted">
                                                     {{comment.date}}
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-pencil-square-o js-edit-comment" data-comment-id={{comment.id}}  data-comment-text='{{comment.text}}' aria-hidden="true"></i>
                                                     <i class="fa fa-times js-remove-comment" data-comment-id={{comment.id}} aria-hidden="true"></i>
                                                 </span>
                                                 <h5>
@@ -396,6 +396,17 @@
                 Вы уверены, что хотите удалить свой комментарий?
             </h3>
             <input type="submit" value="Удалить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="comment-id">
+        </form>
+        <!-- edit -->
+        <form action="/controller.php?mode=edit-comment" method="POST" class="edit-comment">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Измените свой комментарий:
+            </h3>
+            <textarea class="input-text" name="text"></textarea>
+            <input type="submit" value="Сохранить" class="input-submit">
             <a href="#" class="input-cancel">Отмена</a>
             <input type="hidden" name="comment-id">
         </form>

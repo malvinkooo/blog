@@ -32,11 +32,15 @@ switch ($_GET['mode']) {
 		}
 		break;
 	case "remove-comment":
-		echo "<pre>";
-		var_dump($_POST);
-		echo "</pre>";
 		if(isset($_POST['comment-id'])) {
 			remove_comment($_POST['comment-id']);
+			header("Location: ". $_SERVER['HTTP_REFERER']);
+			exit();
+		}
+		break;
+	case "edit-comment":
+		if(isset($_POST['comment-id'])) {
+			edit_comment($_POST);
 			header("Location: ". $_SERVER['HTTP_REFERER']);
 			exit();
 		}

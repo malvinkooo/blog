@@ -182,4 +182,15 @@
         var id = $(this).attr("data-comment-id");
         $(".remove-comment input[type='hidden']").attr('value', id);
     });
+    /*edit comment*/
+    $(".js-edit-comment").click(function(){
+        $(".wrap-popup").addClass("opened");
+        $(".edit-comment").addClass("opened");
+
+        var id = $(this).attr("data-comment-id");
+        $(".edit-comment input[type='hidden']").attr('value', id);
+
+        var text = $(this).attr("data-comment-text");
+        $(".edit-comment textarea").html(text);
+    });
 })(jQuery);
