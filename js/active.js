@@ -174,4 +174,12 @@
         var name = $(this).attr("data-name-category");
         $(".edit-category input[type='text']").attr('value', name);
     });
+    /*remove category*/
+    $(".js-remove-comment").click(function(){
+        $(".wrap-popup").addClass("opened");
+        $(".remove-comment").addClass("opened");
+
+        var id = $(this).attr("data-comment-id");
+        $(".remove-comment input[type='hidden']").attr('value', id);
+    });
 })(jQuery);
