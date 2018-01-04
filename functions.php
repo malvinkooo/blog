@@ -56,4 +56,14 @@ function get_comments($article_id) {
 	$stm->execute(array($article_id));
 	return $stm->fetchAll(PDO::FETCH_ASSOC);
 }
+// function add_comment($comment) {
+// 	global $db;
+// 	$stm = $db->prepare("INSERT INTO comments (`author`, `date`, `text`) VALUES (:author, :date, :text) WHERE `article_id` = :article_id");
+// 	$stm->execute(array(
+// 		':author' => $comment['name'],
+// 		':date' => date('Y-m-d'),
+// 		':text' => $comment['text'],
+// 		':article_id' => $comment[':article_id']
+// 	));
+// }
 ?>
