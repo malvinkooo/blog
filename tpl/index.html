@@ -32,43 +32,6 @@
         </div>
     </section>
     <!-- ****** Categories Area End ****** -->
-
-    <!-- ****** Popup add/edit/delete category Start ****** -->
-    <div class="wrap-popup">
-        <!-- add -->
-        <form action="/controller.php?mode=add-category" method="POST" class="add-category">
-            <i class="fa fa-times close-popup" aria-hidden="true"></i>
-            <h3 class="popup-title">
-                Пожалуйста, введите название категории:
-            </h3>
-            <input type="text" class="input-text" name="category">
-            <input type="submit" value="Добавить" class="input-submit">
-            <a href="#" class="input-cancel">Отмена</a>
-        </form>
-        <!-- edit -->
-        <form action="/controller.php?mode=edit-category" method="POST" class="edit-category">
-            <i class="fa fa-times close-popup" aria-hidden="true"></i>
-            <h3 class="popup-title">
-                Измените название категории:
-            </h3>
-            <input type="text" class="input-text" name="category">
-            <input type="submit" value="Сохранить" class="input-submit">
-            <a href="#" class="input-cancel">Отмена</a>
-            <input type="hidden" name="category-id">
-        </form>
-        <!-- delete -->
-        <form action="/controller.php?mode=remove-category" method="POST" class="remove-category">
-            <i class="fa fa-times close-popup" aria-hidden="true"></i>
-            <h3 class="popup-title">
-                Вы уверены, что хотите удалить категорию?
-            </h3>
-            <input type="submit" value="Удалить" class="input-submit">
-            <a href="#" class="input-cancel">Отмена</a>
-            <input type="hidden" name="category-id">
-        </form>
-    </div>
-    <!-- ****** Popup add/edit/delete category End ****** -->
-
     {% include 'footer.html' %}
     {% include 'scripts.html' %}
 </body>

@@ -1556,7 +1556,7 @@ li {
 }
 .add-category,
 .remove-category,
-.edit-categoryб,
+.edit-category,
 .remove-comment,
 .edit-comment,
 .remove-article {
@@ -1585,6 +1585,7 @@ li {
 .input-submit,
 .input-cancel {
     display: inline-block;
+    margin-top: 15px;
     color: #000000;
     text-align: center;
     vertical-align: middle;

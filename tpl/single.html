@@ -37,9 +37,16 @@
                                     {{current_category.category_name}}
                                 </a>
                             </li>
+                        {% if article is empty %}
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Добавить статью
+                            </li>
+                        {% else %}
                             <li class="breadcrumb-item active" aria-current="page">
                                 {{article.article_title}}
                             </li>
+                        {% endif %}
+
                         </ol>
                     </nav>
                 </div>
@@ -83,12 +90,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#">
+                                    <!-- <a href="#"> -->
                                         <h2 class="post-headline">
                                             {{article.article_title}}
                                         </h2>
-                                    </a>
-                                    {{article.article_content}}
+                                    <!-- </a> -->
+                                    {% autoescape %}
+                                        {{ article.article_content | raw }}
+                                    {% endautoescape %}
                                 </div>
 
                                 {% if article is empty %}
@@ -268,7 +277,7 @@
     </section>
     <!-- ****** Single Blog Area End ****** -->
     <!-- ****** Popup add/edit/delete category Start ****** -->
-    <div class="wrap-popup">
+    <div class="wrap-popup popup-single">
         <!-- delete comment -->
         <form action="/controller.php?mode=remove-comment" method="POST" class="remove-comment">
             <i class="fa fa-times close-popup" aria-hidden="true"></i>

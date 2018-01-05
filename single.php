@@ -9,7 +9,6 @@ $twig->addExtension(new Twig_Extension_Debug());
 
 $categories = get_categories();
 $current_category = get_current_category($_GET['category_id']);
-
 if(isset($_GET['article_id'])){
 	$article = get_article($_GET['article_id']);
 	$comments = get_comments($_GET['article_id']);
@@ -27,8 +26,4 @@ if(isset($_GET['article_id'])){
 		'current_category' => $current_category[0]
 	));
 }
-
-
-
-
 ?>
