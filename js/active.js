@@ -157,7 +157,7 @@
 
     /*remove category*/
     $(".js-remove-category").click(function(){
-        $(".wrap-popup").addClass("opened");
+        $(".popup-category").addClass("opened");
         $(".remove-category").addClass("opened");
 
         var id = $(this).attr("data-id-category");
@@ -165,7 +165,7 @@
     });
     /*edit category*/
     $(".js-edit-category").click(function(){
-        $(".wrap-popup").addClass("opened");
+        $(".popup-category").addClass("opened");
         $(".edit-category").addClass("opened");
 
         var id = $(this).attr("data-id-category");
@@ -174,9 +174,9 @@
         var name = $(this).attr("data-name-category");
         $(".edit-category input[type='text']").attr('value', name);
     });
-    /*remove category*/
+    /*remove comment*/
     $(".js-remove-comment").click(function(){
-        $(".wrap-popup").addClass("opened");
+        $(".popup-single").addClass("opened");
         $(".remove-comment").addClass("opened");
 
         var id = $(this).attr("data-comment-id");
@@ -184,7 +184,7 @@
     });
     /*edit comment*/
     $(".js-edit-comment").click(function(){
-        $(".popup-comment").addClass("opened");
+        $(".popup-single").addClass("opened");
         $(".edit-comment").addClass("opened");
 
         var id = $(this).attr("data-comment-id");
@@ -201,6 +201,6 @@
 
     /*init tiny*/
     tinymce.init({
-    selector: '#add-article-tiny',
-  });
+        selector: '#add-article-tiny',
+    });
 })(jQuery);
