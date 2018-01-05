@@ -29,7 +29,7 @@
                             <li class="breadcrumb-item">
                                 <a href="/">
                                     <i class="fa fa-home" aria-hidden="true"></i>
-                                    Home
+                                    Главная
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
@@ -72,6 +72,14 @@
                                                 <a href="#">
                                                     {{article.article_date}}
                                                 </a>
+                                                {% if article is defined %}
+                                                <a href="#">
+                                                    <i class="fa fa-pencil-square-o js-edit-article" data-article-id={{article.id}}  data-article-content='{{article.article_content}}' aria-hidden="true"></i>
+                                                </a>
+                                                <a href="#">
+                                                    <i class="fa fa-times js-remove-article" data-article-id={{article.id}} aria-hidden="true"></i>
+                                                </a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -82,8 +90,17 @@
                                     </a>
                                     {{article.article_content}}
                                 </div>
-                            </div>
 
+                                {% if article is empty %}
+                                    <form action="/controller.php?mode=add-article" method="POST">
+                                        <p>Введи заголовок статьи</p>
+                                        <input type="text" name="title" class="input-text">
+                                        <textarea id="add-article-tiny" name="content" rows="20"></textarea>
+                                        <input type="hidden" name="category_id" value="{{current_category.id}}">
+                                        <input type="submit" value="Добавить статью" class="input-submit">
+                                    </form>
+                                {% endif %}
+                            </div>
                             <!-- Related Post Area -->
                             <div class="related-post-area section_padding_50">
                                 <h4 class="mb-30">Related post</h4>
@@ -252,7 +269,7 @@
     <!-- ****** Single Blog Area End ****** -->
     <!-- ****** Popup add/edit/delete category Start ****** -->
     <div class="wrap-popup">
-        <!-- delete -->
+        <!-- delete comment -->
         <form action="/controller.php?mode=remove-comment" method="POST" class="remove-comment">
             <i class="fa fa-times close-popup" aria-hidden="true"></i>
             <h3 class="popup-title">
@@ -262,7 +279,7 @@
             <a href="#" class="input-cancel">Отмена</a>
             <input type="hidden" name="comment-id">
         </form>
-        <!-- edit -->
+        <!-- edit comment -->
         <form action="/controller.php?mode=edit-comment" method="POST" class="edit-comment">
             <i class="fa fa-times close-popup" aria-hidden="true"></i>
             <h3 class="popup-title">
@@ -273,19 +290,20 @@
             <a href="#" class="input-cancel">Отмена</a>
             <input type="hidden" name="comment-id">
         </form>
+        <!-- delete article -->
+        <form action="/controller.php?mode=remove-article" method="POST" class="remove-article">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Вы уверены, что хотите удалить статью?
+            </h3>
+            <input type="submit" value="Удалить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="article-id" value="{{article.id}}">
+            <input type="hidden" name="category-id" value="{{current_category.id}}">
+        </form>
     </div>
     <!-- ****** Popup add/edit/delete category End ****** -->
 
     {% include 'footer.html' %}
-
-    <!-- Jquery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap-4 js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins JS -->
-    <script src="js/others/plugins.js"></script>
-    <!-- Active JS -->
-    <script src="js/active.js"></script>
+    {% include 'scripts.html' %}
 </body>

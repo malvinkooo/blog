@@ -76,4 +76,19 @@ function edit_comment($comment) {
 	$stm = $db->prepare("UPDATE comments SET text = :text WHERE id = :id");
 	$stm->execute(array(':text' => $comment['text'], ':id' => $comment['comment-id']));
 }
+function add_article($article) {
+	global $db;
+	$stm = $db->prepare("INSERT INTO `articles` (`article_date`, `article_title`, `article_content`, `category_id`) VALUES (:article_date, :article_title, :article_content, :category_id)");
+	$stm->execute(array(
+		':article_date' => date('Y-m-d'),
+		':article_title' => $article['title'],
+		':article_content' => $article['content'],
+		':category_id' => $article['category_id']
+	));
+}
+function remove_article($id) {
+	global $db;
+	$stm = $db->prepare("DELETE FROM articles WHERE id = ?");
+	$stm->execute(array($id));
+}
 ?>

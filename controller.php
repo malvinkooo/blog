@@ -45,5 +45,23 @@ switch ($_GET['mode']) {
 			exit();
 		}
 		break;
+	case "add-article":
+		if(isset($_POST)) {
+			add_article($_POST);
+			$id = (int) $_POST['category_id'];
+			$loc = "/section.php?id=$id";
+			header("Location: $loc");
+			exit();
+		}
+		break;
+	case "remove-article":
+		if(isset($_POST)) {
+			remove_article($_POST['article-id']);
+			$id = (int) $_POST['category-id'];
+			$loc = "/section.php?id=$id";
+			header("Location: $loc");
+			exit();
+		}
+		break;
 }
 ?>

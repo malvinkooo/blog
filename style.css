@@ -896,7 +896,8 @@ li {
     margin-bottom: 50px;
 }
 
-.widget-title > h6 {
+.widget-title > h6,
+.add-article {
     background: #fee2d9;
     height: 40px;
     width: 100%;
@@ -905,6 +906,15 @@ li {
     margin-bottom: 30px;
 }
 
+.add-article {
+    display: inline-block;
+    color: #000000;
+    text-align: center;
+}
+.add-article:hover {
+    color: #000000;
+    background-color: #ffbba5;
+}
 .about-me-widget-thumb img {
     height: 200px;
     width: 200px;
@@ -1529,7 +1539,8 @@ li {
 .remove-category.opened,
 .edit-category.opened,
 .remove-comment.opened,
-.edit-comment.opened {
+.edit-comment.opened,
+.remove-article.opened {
     display: block;
 }
 .close-popup {
@@ -1547,7 +1558,8 @@ li {
 .remove-category,
 .edit-categoryб,
 .remove-comment,
-.edit-comment {
+.edit-comment,
+.remove-article {
     position: relative;
     width: 500px;
     margin: 50px auto 0 auto;

@@ -193,4 +193,14 @@
         var text = $(this).attr("data-comment-text");
         $(".edit-comment textarea").html(text);
     });
+    /*remove category*/
+    $(".js-remove-article").click(function(){
+        $(".wrap-popup").addClass("opened");
+        $(".remove-article").addClass("opened");
+    });
+
+    /*init tiny*/
+    tinymce.init({
+    selector: '#add-article-tiny'
+  });
 })(jQuery);
