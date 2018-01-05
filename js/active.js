@@ -200,7 +200,14 @@
     });
 
     /*init tiny*/
-    tinymce.init({
-        selector: '#add-article-tiny',
-    });
+    if($('#add-article-tiny').length){
+        tinymce.init({
+            selector: '#add-article-tiny',
+            setup: function (editor) {
+                editor.on('init', function (e) {
+                    editor.setContent('<span>some</span> html');
+                });
+            }
+        });
+    }
 })(jQuery);
