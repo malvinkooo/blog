@@ -1,4 +1,12 @@
-<!-- ****** Top Header Area Start ****** -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <title>Страница не найдена</title>
+</head>
+<body class="not-found">
+	<!-- ****** Top Header Area Start ****** -->
     <div class="container">
         <div class="row">
             <div class="col-5 col-sm-6">
@@ -44,19 +52,6 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="/">Главная</a>
-                                    {% for category in categories %}
-                                        <a class="dropdown-item" href="/category.php?id={{category.id}}">{{category.category_name}}
-                                        </a>
-                                    {% endfor %}
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link js-add-category" href="#">Добавить категорию</a>
-                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -65,3 +60,16 @@
         </div>
     </header>
     <!-- ****** Header Area End ****** -->
+    <h2>500</h2>
+    <h1>Страница не найдена</h1>
+    <p>
+		<?php
+			echo $_GET['error'];
+		?>
+    </p>
+
+<?php
+    require_once "footer.html";
+?>
+</body>
+</html>

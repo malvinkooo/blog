@@ -10,5 +10,5 @@ $articles = get_articles_by_category($_GET['id']);
 
 $current_category = get_current_category($_GET['id']);
 
-echo $twig->render('section.html', array('categories' => $categories, 'articles' => $articles, 'current_category' => $current_category[0]));
+echo $twig->render('category.html', array('categories' => $categories, 'articles' => $articles, 'current_category' => $current_category));
 ?>

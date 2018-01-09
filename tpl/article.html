@@ -13,11 +13,11 @@
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
                         <h2>
-                        {% if mode is defined %}
+                        {% if mode == 'edit_article' %}
                             Редактировать статью
-                        {% elseif article is empty %}
+                        {% elseif mode == 'add_article' %}
                             Добавить статью
-                        {% else %}
+                        {% elseif mode == 'show_article' %}
                             {{article.article_title}}
                         {% endif %}
                         </h2>
@@ -39,19 +39,19 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/section.php?id={{current_category.id}}">
+                                <a href="/category.php?id={{current_category.id|escape('url')}}">
                                     {{current_category.category_name}}
                                 </a>
                             </li>
-                        {% if mode is defined %}
+                        {% if mode == 'edit_article' %}
                             <li class="breadcrumb-item active" aria-current="page">
                                 Редактировать статью
                             </li>
-                        {% elseif article is empty %}
+                        {% elseif mode == 'add_article' %}
                             <li class="breadcrumb-item active" aria-current="page">
                                 Добавить статью
                             </li>
-                        {% else %}
+                        {% elseif mode == 'show_article' %}
                             <li class="breadcrumb-item active" aria-current="page">
                                 {{article.article_title}}
                             </li>
@@ -81,7 +81,7 @@
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content">
-                                {% if mode is empty %}
+                                {% if mode == 'show_article' %}
                                     <div class="post-meta d-flex">
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Date -->
@@ -89,59 +89,43 @@
                                                 <a href="#">
                                                     {{article.article_date}}
                                                 </a>
-                                                <a href="/single.php?category_id={{current_category.id}}&article_id={{article.id}}&mode=edit-article">
-                                                    <i class="fa fa-pencil-square-o js-edit-article" data-article-id={{article.id}}  data-article-content='{{article.article_content}}' aria-hidden="true"></i>
+                                                <a href="/article.php?category_id={{current_category.id|escape('url')}}&article_id={{article.id|escape('url')}}&mode=edit_article">
+                                                    <i class="fa fa-pencil-square-o js-edit-article" data-article-id="{{article.id|escape('html_attr')}}" aria-hidden="true"></i>
                                                 </a>
                                                 <a href="#">
-                                                    <i class="fa fa-times js-remove-article" data-article-id={{article.id}} aria-hidden="true"></i>
+                                                    <i class="fa fa-times js-remove-article" data-article-id="{{article.id|escape('html_attr')}}" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <a href="#"> -->
-                                        <h2 class="post-headline">
-                                            {{article.article_title}}
-                                        </h2>
-                                    <!-- </a> -->
-                                    {% autoescape %}
-                                        {{ article.article_content | raw }}
-                                    {% endautoescape %}
+                                    <h2 class="post-headline">
+                                        {{article.article_title}}
+                                    </h2>
+                                    {{ article.article_content | raw }}
                                 {% endif %}
                                 </div>
-                                {% if mode is defined %}
-                                    {% autoescape %}
+                                {% if mode == 'edit_article' %}
                                     <form action="/controller.php?mode=edit-article" method="POST">
-                                        <p>Введи заголовок статьи</p>
-                                        <p>{{article.article_title}}</p>
-                                        <input type="text" name="title" class="input-text" value={{article.article_title}}>
+                                        <input type="text" name="title" class="input-text" value="{{article.article_title|escape('html_attr')}}">
                                         <textarea id="edit-article-tiny" name="content" rows="20">
-                                            {{article.article_content | raw}}
+                                            {{article.article_content}}
                                         </textarea>
-                                        <input type="hidden" name="category_id" value="{{current_category.id}}">
-                                        <input type="submit" value="Добавить статью" class="input-submit">
+                                        <input type="hidden" name="category_id" value="{{current_category.id|escape('html_attr')}}">
+                                        <input type="submit" value="Сохранить" class="input-submit">
                                     </form>
-                                    <script>
-                                        if($('#edit-article-tiny').length){
-                                            tinymce.init({
-                                                selector: '#edit-article-tiny',
-                                            });
-                                        }
-                                    </script>
-                                    {% endautoescape %}
-                                {% elseif article is empty %}
+                                {% elseif mode == 'add_article' %}
                                     <form action="/controller.php?mode=add-article" method="POST">
-                                        <p>Введи заголовок статьи</p>
+                                        <p>Введите заголовок статьи</p>
                                         <input type="text" name="title" class="input-text">
                                         <textarea id="add-article-tiny" name="content" rows="20"></textarea>
-                                        <input type="hidden" name="category_id" value="{{current_category.id}}">
-                                        <input type="submit" value="Добавить статью" class="input-submit">
+                                        <input type="hidden" name="category_id" value="{{current_category.id|escape('html_attr')}}">
+                                        <input type="submit" value="Сохранить" class="input-submit">
                                     </form>
-                                <!-- {% else %} -->
                                 {% endif %}
                             </div>
                             <!-- Related Post Area -->
                             <div class="related-post-area section_padding_50">
-                                <h4 class="mb-30">Related post</h4>
+                                <h4 class="mb-30">Похожие статьи</h4>
 
                                 <div class="related-post-slider owl-carousel">
                                     <!-- Single Related Post-->
@@ -249,7 +233,11 @@
                             <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
                                 <h4 class="mb-30">
-                                    {{comments_count}} Комментарии
+                                    {% if comments is empty %}
+                                        Здесь еще нет комментариев. Ваш комментарий будет первым!
+                                    {% elseif comments %}
+                                        {{comments_count}} Комментарии
+                                    {% endif %}
                                 </h4>
                                 <ol>
                                 {% for comment in comments %}
@@ -264,8 +252,8 @@
                                             <div class="comment-content">
                                                 <span class="comment-date text-muted">
                                                     {{comment.date}}
-                                                    <i class="fa fa-pencil-square-o js-edit-comment" data-comment-id={{comment.id}}  data-comment-text='{{comment.text}}' aria-hidden="true"></i>
-                                                    <i class="fa fa-times js-remove-comment" data-comment-id={{comment.id}} aria-hidden="true"></i>
+                                                    <i class="fa fa-pencil-square-o js-edit-comment" data-comment-id="{{comment.id|escape('html_attr')}}"  data-comment-text="{{comment.text|escape('html_attr')}}" aria-hidden="true"></i>
+                                                    <i class="fa fa-times js-remove-comment" data-comment-id="{{comment.id|escape('html_attr')}}" aria-hidden="true"></i>
                                                 </span>
                                                 <h5>
                                                     {{comment.author}}
@@ -288,14 +276,14 @@
                                     <!-- Comment Form -->
                                     <form action="/controller.php?mode=add-comment" method="POST">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="contact-name" placeholder="Name" name="name">
+                                            <input type="text" class="form-control" id="contact-name" placeholder="Имя" name="name">
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Комментарий"></textarea>
                                         </div>
-                                        <input type="hidden" value={{article.id}} name="article_id">
+                                        <input type="hidden" value="{{article.id|escape('html_attr')}}" name="article_id">
                                         <button type="submit" class="btn contact-btn">
-                                            Post Comment
+                                            Добавить
                                         </button>
                                     </form>
                                 </div>
@@ -308,7 +296,7 @@
         </div>
     </section>
     <!-- ****** Single Blog Area End ****** -->
-    <!-- ****** Popup add/edit/delete category Start ****** -->
+    <!-- ****** Popup add/edit/delete article/comment Start ****** -->
     <div class="wrap-popup popup-single">
         <!-- delete comment -->
         <form action="/controller.php?mode=remove-comment" method="POST" class="remove-comment">
@@ -339,11 +327,11 @@
             </h3>
             <input type="submit" value="Удалить" class="input-submit">
             <a href="#" class="input-cancel">Отмена</a>
-            <input type="hidden" name="article-id" value="{{article.id}}">
-            <input type="hidden" name="category-id" value="{{current_category.id}}">
+            <input type="hidden" name="article-id" value="{{article.id|escape('html_attr')}}">
+            <input type="hidden" name="category-id" value="{{current_category.id|escape('html_attr')}}">
         </form>
     </div>
-    <!-- ****** Popup add/edit/delete category End ****** -->
+    <!-- ****** Popup add/edit/delete article/comment End ****** -->
 
     {% include 'footer.html' %}
     {% include 'scripts.html' %}

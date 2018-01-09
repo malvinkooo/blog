@@ -1607,3 +1607,16 @@ li {
     border-color: #fc6c3f;
     color: #ffffff;
 }
+.not-found {
+    text-align: center;
+}
+.not-found h2 {
+    margin-top: 70px;
+}
+.not-found .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+}

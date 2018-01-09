@@ -11,7 +11,7 @@ switch ($_GET['mode']) {
 		break;
 
 	case "remove-category":
-		if(isset($_POST['id-category'])) {
+		if(isset($_POST['category-id'])) {
 			remove_category($_POST['category-id']);
 			header('Location: /');
 			exit();
@@ -49,7 +49,7 @@ switch ($_GET['mode']) {
 		if(isset($_POST)) {
 			add_article($_POST);
 			$id = (int) $_POST['category_id'];
-			$loc = "/section.php?id=$id";
+			$loc = "/category.php?id=$id";
 			header("Location: $loc");
 			exit();
 		}
@@ -58,7 +58,7 @@ switch ($_GET['mode']) {
 		if(isset($_POST)) {
 			remove_article($_POST['article-id']);
 			$id = (int) $_POST['category-id'];
-			$loc = "/section.php?id=$id";
+			$loc = "/category.php?id=$id";
 			header("Location: $loc");
 			exit();
 		}
