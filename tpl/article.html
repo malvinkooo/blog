@@ -1,0 +1,338 @@
+    {% include 'head.html' %}
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="yummy-load"></div>
+    </div>
+
+    {% include 'header.html' %}
+
+    <!-- ****** Breadcumb Area Start ****** -->
+    <div class="breadcumb-area" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>
+                        {% if mode == 'edit_article' %}
+                            Редактировать статью
+                        {% elseif mode == 'add_article' %}
+                            Добавить статью
+                        {% elseif mode == 'show_article' %}
+                            {{article.article_title}}
+                        {% endif %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="breadcumb-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    Главная
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/category.php?id={{current_category.id|escape('url')}}">
+                                    {{current_category.category_name}}
+                                </a>
+                            </li>
+                        {% if mode == 'edit_article' %}
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Редактировать статью
+                            </li>
+                        {% elseif mode == 'add_article' %}
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Добавить статью
+                            </li>
+                        {% elseif mode == 'show_article' %}
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{article.article_title}}
+                            </li>
+                        {% endif %}
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****** Breadcumb Area End ****** -->
+
+    <!-- ****** Single Blog Area Start ****** -->
+    <section class="single_blog_area section_padding_80">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% include 'sidebar.html' %}
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="row no-gutters">
+
+                        <!-- Single Post -->
+                        <div class="col-10 col-sm-12">
+                            <div class="single-post">
+                                <!-- Post Thumb -->
+                                <div class="post-thumb">
+                                    <img src="img/blog-img/10.jpg" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                {% if mode == 'show_article' %}
+                                    <div class="post-meta d-flex">
+                                        <div class="post-author-date-area d-flex">
+                                            <!-- Post Date -->
+                                            <div class="post-date">
+                                                <a href="#">
+                                                    {{article.article_date}}
+                                                </a>
+                                                <a href="/article.php?category_id={{current_category.id|escape('url')}}&article_id={{article.id|escape('url')}}&mode=edit_article">
+                                                    <i class="fa fa-pencil-square-o js-edit-article" data-article-id="{{article.id|escape('html_attr')}}" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="#">
+                                                    <i class="fa fa-times js-remove-article" data-article-id="{{article.id|escape('html_attr')}}" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 class="post-headline">
+                                        {{article.article_title}}
+                                    </h2>
+                                    {{ article.article_content | raw }}
+                                {% endif %}
+                                </div>
+                                {% if mode == 'edit_article' %}
+                                    <form action="/controller.php?mode=edit-article" method="POST">
+                                        <input type="text" name="title" class="input-text" value="{{article.article_title|escape('html_attr')}}">
+                                        <textarea id="edit-article-tiny" name="content" rows="20">
+                                            {{article.article_content}}
+                                        </textarea>
+                                        <input type="hidden" name="category_id" value="{{current_category.id|escape('html_attr')}}">
+                                        <input type="submit" value="Сохранить" class="input-submit">
+                                    </form>
+                                {% elseif mode == 'add_article' %}
+                                    <form action="/controller.php?mode=add-article" method="POST">
+                                        <p>Введите заголовок статьи</p>
+                                        <input type="text" name="title" class="input-text">
+                                        <textarea id="add-article-tiny" name="content" rows="20"></textarea>
+                                        <input type="hidden" name="category_id" value="{{current_category.id|escape('html_attr')}}">
+                                        <input type="submit" value="Сохранить" class="input-submit">
+                                    </form>
+                                {% endif %}
+                            </div>
+                            <!-- Related Post Area -->
+                            <div class="related-post-area section_padding_50">
+                                <h4 class="mb-30">Похожие статьи</h4>
+
+                                <div class="related-post-slider owl-carousel">
+                                    <!-- Single Related Post-->
+                                    <div class="single-post">
+                                        <!-- Post Thumb -->
+                                        <div class="post-thumb">
+                                            <img src="img/blog-img/15.jpg" alt="">
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <div class="post-meta d-flex">
+                                                <div class="post-author-date-area d-flex">
+                                                    <!-- Post Author -->
+                                                    <div class="post-author">
+                                                        <a href="#">By Marian</a>
+                                                    </div>
+                                                    <!-- Post Date -->
+                                                    <div class="post-date">
+                                                        <a href="#">May 19, 2017</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Single Related Post-->
+                                    <div class="single-post">
+                                        <!-- Post Thumb -->
+                                        <div class="post-thumb">
+                                            <img src="img/blog-img/5.jpg" alt="">
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <div class="post-meta d-flex">
+                                                <div class="post-author-date-area d-flex">
+                                                    <!-- Post Author -->
+                                                    <div class="post-author">
+                                                        <a href="#">By Marian</a>
+                                                    </div>
+                                                    <!-- Post Date -->
+                                                    <div class="post-date">
+                                                        <a href="#">May 19, 2017</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Single Related Post-->
+                                    <div class="single-post">
+                                        <!-- Post Thumb -->
+                                        <div class="post-thumb">
+                                            <img src="img/blog-img/16.jpg" alt="">
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <div class="post-meta d-flex">
+                                                <div class="post-author-date-area d-flex">
+                                                    <!-- Post Author -->
+                                                    <div class="post-author">
+                                                        <a href="#">By Marian</a>
+                                                    </div>
+                                                    <!-- Post Date -->
+                                                    <div class="post-date">
+                                                        <a href="#">May 19, 2017</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Single Related Post-->
+                                    <div class="single-post">
+                                        <!-- Post Thumb -->
+                                        <div class="post-thumb">
+                                            <img src="img/blog-img/5.jpg" alt="">
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <div class="post-meta d-flex">
+                                                <div class="post-author-date-area d-flex">
+                                                    <!-- Post Author -->
+                                                    <div class="post-author">
+                                                        <a href="#">By Marian</a>
+                                                    </div>
+                                                    <!-- Post Date -->
+                                                    <div class="post-date">
+                                                        <a href="#">May 19, 2017</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#">
+                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Comment Area Start -->
+                            <div class="comment_area section_padding_50 clearfix">
+                                <h4 class="mb-30">
+                                    {% if comments is empty %}
+                                        Здесь еще нет комментариев. Ваш комментарий будет первым!
+                                    {% elseif comments %}
+                                        {{comments_count}} Комментарии
+                                    {% endif %}
+                                </h4>
+                                <ol>
+                                {% for comment in comments %}
+                                    <!-- Single Comment Area -->
+                                    <li class="single_comment_area">
+                                        <div class="comment-wrapper d-flex">
+                                            <!-- Comment Meta -->
+                                            <div class="comment-author">
+                                                <img src="img/blog-img/17.jpg" alt="">
+                                            </div>
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <span class="comment-date text-muted">
+                                                    {{comment.date}}
+                                                    <i class="fa fa-pencil-square-o js-edit-comment" data-comment-id="{{comment.id|escape('html_attr')}}"  data-comment-text="{{comment.text|escape('html_attr')}}" aria-hidden="true"></i>
+                                                    <i class="fa fa-times js-remove-comment" data-comment-id="{{comment.id|escape('html_attr')}}" aria-hidden="true"></i>
+                                                </span>
+                                                <h5>
+                                                    {{comment.author}}
+                                                </h5>
+                                                <p>
+                                                    {{comment.text}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                                </ol>
+                            </div>
+                            <!-- Leave A Comment -->
+                            <div class="leave-comment-area section_padding_50 clearfix">
+                                <div class="comment-form">
+                                    <h4 class="mb-30">
+                                        Оставить комментарий
+                                    </h4>
+                                    <!-- Comment Form -->
+                                    <form action="/controller.php?mode=add-comment" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="contact-name" placeholder="Имя" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Комментарий"></textarea>
+                                        </div>
+                                        <input type="hidden" value="{{article.id|escape('html_attr')}}" name="article_id">
+                                        <button type="submit" class="btn contact-btn">
+                                            Добавить
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ****** Single Blog Area End ****** -->
+    <!-- ****** Popup add/edit/delete article/comment Start ****** -->
+    <div class="wrap-popup popup-single">
+        <!-- delete comment -->
+        <form action="/controller.php?mode=remove-comment" method="POST" class="remove-comment">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Вы уверены, что хотите удалить свой комментарий?
+            </h3>
+            <input type="submit" value="Удалить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="comment-id">
+        </form>
+        <!-- edit comment -->
+        <form action="/controller.php?mode=edit-comment" method="POST" class="edit-comment">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Измените свой комментарий:
+            </h3>
+            <textarea class="input-text" name="text"></textarea>
+            <input type="submit" value="Сохранить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="comment-id">
+        </form>
+        <!-- delete article -->
+        <form action="/controller.php?mode=remove-article" method="POST" class="remove-article">
+            <i class="fa fa-times close-popup" aria-hidden="true"></i>
+            <h3 class="popup-title">
+                Вы уверены, что хотите удалить статью?
+            </h3>
+            <input type="submit" value="Удалить" class="input-submit">
+            <a href="#" class="input-cancel">Отмена</a>
+            <input type="hidden" name="article-id" value="{{article.id|escape('html_attr')}}">
+            <input type="hidden" name="category-id" value="{{current_category.id|escape('html_attr')}}">
+        </form>
+    </div>
+    <!-- ****** Popup add/edit/delete article/comment End ****** -->
+
+    {% include 'footer.html' %}
+    {% include 'scripts.html' %}
+</body>
