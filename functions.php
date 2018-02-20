@@ -13,7 +13,7 @@ function get_categories() {
 }
 function get_articles_by_category($id) {
 	global $db;
-	$stm = $db->prepare("SELECT * FROM articles WHERE category_id = ?");
+	$stm = $db->prepare("SELECT articles.*, IFNULL(commentsStats.commentsCount, 0) AS commentsCount FROM articles LEFT JOIN (SELECT  articles.id AS article_id, COUNT(comments.id) AS commentsCount FROM comments LEFT JOIN articles ON comments.article_id = articles.id GROUP BY articles.id) AS commentsStats ON articles.id = commentsStats.article_id WHERE articles.category_id = ?");
 	$stm->execute(array($id));
 	return $stm->fetchAll(PDO::FETCH_ASSOC);
 }

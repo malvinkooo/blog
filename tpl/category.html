@@ -76,6 +76,15 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        <div class="post-comment-share-area d-flex">
+                                            <!-- Post Comments -->
+                                            <div class="post-comments">
+                                                <a href="#">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    {{article.commentsCount}}
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <a href="/article.php?category_id={{current_category.id|escape('url')}}&article_id={{article.id|escape('url')}}&mode=show_article">
                                         <h4 class="post-headline">
